@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <base href="/">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="Description" content="Demonstration for barnard-rugby">
+
+  <style>
+    :root, html, body {
+      margin: var(--ddd-spacing-0);
+      padding: var(--ddd-spacing-0);
+    }
+    #demo {
+      margin: var(--ddd-spacing-2);
+    }
+    barnard-rugby {
+      margin: var(--ddd-spacing-2);
+      border: var(--ddd-border-md);
+      border-radius: var(--ddd-radius-lg);
+    }
+    barnard-rugby:hover {
+      box-shadow: var(--ddd-boxShadow-sm);
+    }
+    #example {
+      --barnard-rugby-font-size: var(--ddd-font-size-l);
+      background-color: var(--ddd-accent-2);
+      color: var(--ddd-primary-17);
+    }
+  </style>
+  <title>barnard-rugby</title>
+</head>
+
+<body>
+  <div id="demo">
+    <h1>barnard-rugby</h1>
+    <!-- this is going to do whatever the tag's defaults are -->
+    <h2>Default</h2>
+    <barnard-rugby></barnard-rugby>
+  </div>
+  <script type="module" src="./barnard-rugby.js"></script>
+
+</body>
+</html>
