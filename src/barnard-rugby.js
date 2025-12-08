@@ -50,7 +50,7 @@ export class BarnardRugby extends DDDSuper(I18NMixin(LitElement)) {
     });
   }
 
-  // Lit reactive properties
+  // Lit reactive properties 
   static get properties() {
     return {
       ...super.properties,
