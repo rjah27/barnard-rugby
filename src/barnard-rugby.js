@@ -39,7 +39,7 @@ export class BarnardRugby extends DDDSuper(I18NMixin(LitElement)) {
     this.registerLocalization({
       context: this,
       localesPath:
-        new URL("./locales/barnard-rugby.ar.json", import.meta.url).href +
+        new URL("./src/barnard-rugby.js", import.meta.url).href +
         "/../",
       locales: ["ar", "es", "hi", "zh"],
     });
