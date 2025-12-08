@@ -143,6 +143,8 @@ export class BarnardRugby extends DDDSuper(I18NMixin(LitElement)) {
   }
 
   initRouting() {
+    this.route = window.location.pathname;
+    
     window.addEventListener('popstate', () => {
       this.route = window.location.pathname || '/';
       this.requestUpdate();
