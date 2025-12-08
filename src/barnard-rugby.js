@@ -39,7 +39,7 @@ export class BarnardRugby extends DDDSuper(I18NMixin(LitElement)) {
     // Used pilot to help me fix a locals issue regarding my vercel deployment having errors.
     this.registerLocalization({
       context: this,
-      localesPath: new URL("../src/", import.meta.url).href,
+      localesPath: new URL("../locales/", import.meta.url).href,
       locales: ["ar", "es", "hi", "zh"],
     });
   }
