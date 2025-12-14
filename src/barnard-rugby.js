@@ -95,11 +95,36 @@ export class BarnardRugby extends DDDSuper(I18NMixin(LitElement)) {
         padding: var(--ddd-spacing-4);
       }
 
+      footer {
+        background: transparent;
+        padding: 18px 0;
+      }
+
       .barnard-footer {
-        padding: 8px;
-        margin: 4px 4px;
+        display: block;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 12px 18px;
         background: var(--ddd-theme-default-beaverBlue);
-        
+        color: var(--ddd-theme-default-slateMaxLight);
+        box-shadow: 0 1px 0 rgba(0,0,0,0.08) inset;
+      }
+
+      .barnard-footer .footer-grid {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .barnard-footer a {
+        color: inherit;
+        text-decoration: underline;
+      }
+
+      .barnard-footer .contact, .barnard-footer .address {
+        font-size: 0.95rem;
       }
     `];
   }
@@ -141,7 +166,17 @@ export class BarnardRugby extends DDDSuper(I18NMixin(LitElement)) {
           </div>
 
           <footer>
-            <span class = "barnard-footer">© Barnard Rugby</span>
+            <div class="barnard-footer">
+              <div class="footer-grid">
+                <div class="brand">© Barnard Rugby</div>
+                <div class="contact">
+                  <a href="https://instagram.com/barnardrugby">Instagram: @barnardrugby</a>
+                  &nbsp;|&nbsp;
+                  <a href="mailto:barnardrugby@barnard.edu">barnardrugby@barnard.edu</a>
+                </div>
+                <div class="address">Field: 134 Rugby Field Rd, State College, PA 16801</div>
+              </div>
+            </div>
           </footer>
         </div>
       `;
