@@ -10,13 +10,9 @@ import "./pages/home-page.js";
 import "./pages/team-page.js";
 import "./pages/schedule-page.js";
 import "./pages/about-page.js";
+import "./pages/signup-page.js";
 
 /**
- * `barnard-rugby`
- * The original component provided by your project. We'll keep this as the
- * main reusable component and also expose an application shell below that
- * uses this component for the home page.
- *
  * @demo index.html
  * @element barnard-rugby
  */
@@ -39,8 +35,7 @@ export class BarnardRugby extends DDDSuper(I18NMixin(LitElement)) {
     // Used pilot to help me fix a locals issue regarding my vercel deployment having errors.
     this.registerLocalization({
       context: this,
-      localesPath: new URL("../locales/", import.meta.url).href,
-      locales: ["ar", "es", "hi", "zh"],
+      localesPath: new URL("../locales/", import.meta.url).href
     });
   }
 
@@ -99,6 +94,13 @@ export class BarnardRugby extends DDDSuper(I18NMixin(LitElement)) {
         flex: 1;
         padding: var(--ddd-spacing-4);
       }
+
+      .barnard-footer {
+        padding: 8px;
+        margin: 4px 4px;
+        background: var(--ddd-theme-default-beaverBlue);
+        
+      }
     `];
   }
   
@@ -106,6 +108,8 @@ export class BarnardRugby extends DDDSuper(I18NMixin(LitElement)) {
     switch (this.route) {
       case '/team':
         return html`<team-page></team-page>`;
+      case '/signup':
+        return html`<signup-page></signup-page>`;
       case '/about':
         return html`<about-page></about-page>`;
       case '/schedule':
@@ -126,6 +130,7 @@ export class BarnardRugby extends DDDSuper(I18NMixin(LitElement)) {
             <div class="controls">
               <button @click=${this._onHomeClick}>Home</button>
               <button @click=${this._onTeamClick}>Team</button>
+              <button @click=${this._onSignupClick}>Sign Up</button>
               <button @click=${this._onAboutClick}>About</button>
               <button @click=${this._onScheduleClick}>Schedule</button>
             </div>
@@ -136,7 +141,7 @@ export class BarnardRugby extends DDDSuper(I18NMixin(LitElement)) {
           </div>
 
           <footer>
-            <div>© Barnard Rugby</div>
+            <span class = "barnard-footer">© Barnard Rugby</span>
           </footer>
         </div>
       `;
@@ -144,7 +149,7 @@ export class BarnardRugby extends DDDSuper(I18NMixin(LitElement)) {
 
   initRouting() {
     this.route = window.location.pathname;
-    
+
     window.addEventListener('popstate', () => {
       this.route = window.location.pathname || '/';
       this.requestUpdate();
@@ -178,6 +183,11 @@ export class BarnardRugby extends DDDSuper(I18NMixin(LitElement)) {
   _onTeamClick(e) {
     e?.preventDefault();
     this.navigateTo('/team');
+  }
+
+  _onSignupClick(e) {
+    e?.preventDefault();
+    this.navigateTo('/signup');
   }
 
   _onAboutClick(e) {

@@ -34,9 +34,9 @@ class TeamPage extends LitElement {
       }
 
       .player-number {
-        font-weight: 700;
-        color: var(--ddd-theme-default-beaverBlue);
-        font-size: 1.1rem;
+        font-weight: 800;
+        color: var(--ddd-theme-default-potentialMidnight);
+        font-size: var(--ddd-font-size-l);
         margin-bottom: 8px;
       }
 

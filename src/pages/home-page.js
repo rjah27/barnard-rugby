@@ -37,7 +37,7 @@ export class HomePage extends DDDSuper(I18NMixin(LitElement)) {
         margin-top:4px; 
       }
       .heading-content { 
-        margin-top: 12px; 
+        margin-top: 18px; 
       }
       .heading-button { 
         background: var(--ddd-theme-default-gradient-buttons); 
@@ -50,7 +50,7 @@ export class HomePage extends DDDSuper(I18NMixin(LitElement)) {
       .home-highlights { 
         display:flex; 
         gap:12px; 
-        margin-top:18px; 
+        margin-top:64px;
       }
       .highlight-card { 
         background: var(--ddd-theme-default-skyBlue); 
@@ -59,11 +59,80 @@ export class HomePage extends DDDSuper(I18NMixin(LitElement)) {
         flex:1; 
         box-shadow: 0 1px 4px rgba(0,0,0,0.06); 
       }
+      .barnard-achievements {
+        margin-top: 24px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        justify-items: center;
+      }
+      .achievement-card {
+        background: var(--ddd-theme-default-skyBlue);
+        padding: 12px;
+        border-radius: 8px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        max-width: 420px;
+        width: 100%;
+        text-align: center;
+      }
+      .achievement-list {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .barnard-sponsors {
+        margin-top: 20px;
+      }
+      .barnard-sponsors h3 {
+        text-align: center;
+      }
+
+      .sponsor-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 12px;
+        align-items: center;
+        margin-top: 12px;
+      }
+
+      .sponsor-grid img {
+        width: 100%;
+        height: 60px;
+        object-fit: contain;
+        background: white;
+        padding: 8px;
+      }
     `];
   }
 
+  static get properties() {
+    return {
+      ...super.properties,
+      achievements: { type: Array },
+      sponsors: { type: Array }
+    };
+  }
+
+  constructor() {
+    super();
+    this.achievements = [
+      { title: 'Regional Champions', year: '2024, 2025', desc: 'Division I - Team A' },
+      { title: 'Regional Champions', year: '2023, 2024', desc: 'Division II - Team B' },
+      { title: 'National Champions', year: '2024', desc: 'Division I - Team A' },
+      { title: 'Ruggerfest Champions', year: '2024, 2025', desc: 'Division I - Team A' },
+      { title: 'Coach of the Year', year: '2024, 2025', desc: 'Coach Reyes' }
+    ];
+    this.sponsors = [
+      // sample images; replace with your own remote URLs or local assets
+      'https://upload.wikimedia.org/wikipedia/en/thumb/e/e3/Canterbury_of_New_Zealand_logo.svg/1200px-Canterbury_of_New_Zealand_logo.svg.png',
+      'https://gilbertrugby.com.au/cdn/shop/files/gilbertlogoweb.jpg?v=1650501751',
+      'https://upload.wikimedia.org/wikipedia/en/d/da/Puma_complete_logo.svg'
+    ];
+  }
+
   render() {
-    // Simple Warp-style home layout: hero + highlights + CTA
     return html`
       <div class="barnard-home-wrapper">
         <section class="home-heading">
@@ -87,6 +156,27 @@ export class HomePage extends DDDSuper(I18NMixin(LitElement)) {
           <div class="highlight-card">
             <h3>Fitness & Skills</h3>
             <p>Develop athletic ability and rugby techniques</p>
+          </div>
+        </section>
+
+        <section class="barnard-achievements">
+          <h3>Achievements</h3>
+          <div class="achievement-list">
+            ${this.achievements.map(a => html`
+              <div class="achievement-card">
+                <strong>${a.title} — ${a.year}</strong>
+                <div>${a.desc}</div>
+              </div>
+            `)}
+          </div>
+        </section>
+
+        <section class="barnard-sponsors">
+          <h3>Our Sponsors</h3>
+          <div class="sponsor-grid">
+            ${this.sponsors.map(src => html`
+              <div><img src="${src}" alt="sponsor logo"></div>
+            `)}
           </div>
         </section>
       </div>
