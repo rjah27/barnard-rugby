@@ -125,7 +125,6 @@ export class HomePage extends DDDSuper(I18NMixin(LitElement)) {
       { title: 'Coach of the Year', year: '2024, 2025', desc: 'Coach Reyes' }
     ];
     this.sponsors = [
-      // sample images; replace with your own remote URLs or local assets
       'https://upload.wikimedia.org/wikipedia/en/thumb/e/e3/Canterbury_of_New_Zealand_logo.svg/1200px-Canterbury_of_New_Zealand_logo.svg.png',
       'https://gilbertrugby.com.au/cdn/shop/files/gilbertlogoweb.jpg?v=1650501751',
       'https://upload.wikimedia.org/wikipedia/en/d/da/Puma_complete_logo.svg'

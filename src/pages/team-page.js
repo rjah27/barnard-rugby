@@ -1,10 +1,18 @@
-import { LitElement, html, css } from 'lit';
-
-class TeamPage extends LitElement {
-  static get tag() { return 'team-page'; }
+/**
+ * Copyright 2025 rjah27
+ * @license Apache-2.0, see LICENSE for full text.
+ */
+import { LitElement, html, css } from "lit";
+import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
+import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
+class TeamPage extends DDDSuper(I18NMixin(LitElement)) {
+  static get tag() { 
+    return 'team-page'; 
+  }
 
   static get styles() {
-    return css`
+    return [super.styles,
+    css`
       :host { 
         display:block; 
         box-sizing:border-box; 
@@ -60,7 +68,7 @@ class TeamPage extends LitElement {
           box-shadow: none; 
         }
       }
-    `;
+    `];
   }
 
   render() {

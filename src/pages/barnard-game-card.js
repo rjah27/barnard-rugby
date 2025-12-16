@@ -1,6 +1,12 @@
-import { LitElement, html, css } from 'lit';
+/**
+ * Copyright 2025 rjah27
+ * @license Apache-2.0, see LICENSE for full text.
+ */
+import { LitElement, html, css } from "lit";
+import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
+import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
 
-class BarnardGameCard extends LitElement {
+class BarnardGameCard extends DDDSuper(I18NMixin(LitElement)) {
   static get tag() { return 'barnard-game-card'; }
 
 
@@ -23,7 +29,8 @@ class BarnardGameCard extends LitElement {
   }
 
   static get styles() {
-    return css`
+    return [super.styles,
+    css`
       :host { 
         display:block; 
     }
@@ -60,12 +67,12 @@ class BarnardGameCard extends LitElement {
         /* date/time and location should use slateMaxLight */
         .location {
           font-size: 0.9rem;
-          color: var(--ddd-theme-default-slateMaxLight, #666);
+          color: var(--ddd-theme-default-slateMaxLight);
         }
 
         .date {
           font-size: 0.9rem;
-          color: var(--ddd-theme-default-slateMaxLight, #666);
+          color: var(--ddd-theme-default-slateMaxLight);
         }
 
         @media (prefers-color-scheme: dark) {
@@ -79,7 +86,7 @@ class BarnardGameCard extends LitElement {
             color: var(--ddd-theme-default-slateMaxLight);
           }
         }
-      `;
+      `];
   }
 
   render() {

@@ -1,11 +1,18 @@
-import { LitElement, html, css } from 'lit';
+/**
+ * Copyright 2025 rjah27
+ * @license Apache-2.0, see LICENSE for full text.
+ */
+import { LitElement, html, css } from "lit";
+import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
+import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
 import "./barnard-game-card.js";
 
-class SchedulePage extends LitElement {
+class SchedulePage extends DDDSuper(I18NMixin(LitElement)) {
   static get tag() { return 'schedule-page'; }
 
   static get styles() {
-    return css`
+    return [super.styles,
+    css`
       :host {
         display: block;
       }
@@ -22,7 +29,7 @@ class SchedulePage extends LitElement {
         grid-template-columns: repeat(auto-fit, minmax(220px));
         margin-top: 12px;
       }
-    `;
+    `];
   }
   constructor() {
     super();
