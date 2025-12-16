@@ -32,23 +32,23 @@ export class BarnardRugby extends DDDSuper(I18NMixin(LitElement)) {
       ...this.t,
       title: "Title",
     };
+    this.showMiniMenu = false;
     // Used pilot to help me fix a locals issue regarding my vercel deployment having errors.
     this.registerLocalization({
       context: this,
       localesPath: new URL("../locales/", import.meta.url).href
     });
   }
-
-  // Lit reactive properties 
+ 
   static get properties() {
     return {
       ...super.properties,
       title: { type: String },
       route: { type: String },
+      showMiniMenu: { type: Boolean }
     };
   }
 
-  // Lit scoped styles
   static get styles() {
     return [super.styles,
     css`
@@ -82,13 +82,54 @@ export class BarnardRugby extends DDDSuper(I18NMixin(LitElement)) {
         margin-left:8px;
         padding:8px 12px;
         border-radius:6px;
-        border:1px solid rgba(255,255,255,0.08);
+        border:1px solid var(--ddd-theme-default-slateMaxLight);
         background:transparent;
         color:var(--ddd-theme-default-slateMaxLight);
         cursor:pointer;
       }
       .controls button:hover { 
-        background: rgba(255,255,255,0.04); 
+        background: var(--ddd-theme-default-beaverBlue); 
+      }
+      .app-header { 
+        position: relative; 
+      }
+
+      .mini-menu-button {
+        display: none;
+        background: transparent;
+        color: var(--ddd-theme-default-slateMaxLight);
+        padding: 8px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .mini-nav {
+        position: absolute;
+        right: 12px;
+        top: 8px;
+        background: var(--ddd-theme-default-beaverBlue);
+        border-radius: 6px;
+        padding: 8px;
+        box-shadow: 0 6px 18px var(--ddd-theme-default-potential50);
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        z-index: 40;
+        min-width: 200px;
+      }
+
+      .mini-nav button {
+        background: transparent;
+        color: var(--ddd-theme-default-slateMaxLight);
+        border: none;
+        text-align: left;
+        padding: 8px 10px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      .mini-nav button:hover {
+        background: var(--ddd-theme-default-pughBlue);
       }
       .content {
         flex: 1;
@@ -126,6 +167,40 @@ export class BarnardRugby extends DDDSuper(I18NMixin(LitElement)) {
       .barnard-footer .contact, .barnard-footer .address {
         font-size: 0.95rem;
       }
+
+      @media (max-width: 700px) {
+        .controls { display: none; }
+        .mini-menu-button { display: inline-block; }
+        .barnard-footer { padding-left: 12px; padding-right: 12px; }
+      }
+
+      /* I had to search up a techniqye to invert the whole pages content instead of creating
+      a dark mode "button" like I did in previous works. This allows me to 
+      have the page listen to the user's system preferences, the hue-rotate feature is quite cool.*/
+      @media (prefers-color-scheme: dark) {
+        :host {
+          filter: invert(1) hue-rotate(180deg);
+          transition: filter 200ms ease;
+        }
+
+        :host img,:host video,:host svg {
+          filter: invert(1) hue-rotate(180deg);
+        }
+      }
+
+      @media (prefers-color-scheme: light) {
+        :host {
+          color: var(--ddd-theme-default-slateMaxLight);
+        }
+        .content, .title, .brand, .barnard-footer, .barnard-footer .contact, .barnard-footer .address {
+          color: var(--ddd-theme-default-slateMaxLight);
+        }
+        .controls button {
+          color: var(--ddd-theme-default-slateMaxLight);
+          border-color: rgba(255,255,255,0.08);
+        }
+        a { color: inherit; }
+      }
     `];
   }
   
@@ -159,6 +234,18 @@ export class BarnardRugby extends DDDSuper(I18NMixin(LitElement)) {
               <button @click=${this._onAboutClick}>About</button>
               <button @click=${this._onScheduleClick}>Schedule</button>
             </div>
+          
+            <button class="mini-menu-button" @click="${this._toggleMiniMenu}" aria-label="Mini-Menu">☰</button>
+
+            ${this.showMiniMenu ? html`
+              <nav class="mini-nav" @click=${this._onMiniNavClick}>
+                <button data-path="/">Home</button>
+                <button data-path="/team">Team</button>
+                <button data-path="/signup">Sign Up</button>
+                <button data-path="/about">About</button>
+                <button data-path="/schedule">Schedule</button>
+              </nav>
+            ` : ''}
           </header>
 
           <div class="content">
@@ -235,10 +322,21 @@ export class BarnardRugby extends DDDSuper(I18NMixin(LitElement)) {
     this.navigateTo('/schedule');
   }
 
+  _toggleMiniMenu(e) {
+    e?.preventDefault();
+    this.showMiniMenu = !this.showMiniMenu;
+    this.requestUpdate();
+  }
 
-  /**
-   * haxProperties integration via file reference
-   */
+  _onMiniNavClick(e) {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    const path = btn.dataset.path || '/';
+    this.navigateTo(path);
+    this.showMiniMenu = false;
+    this.requestUpdate();
+  }
+
   static get haxProperties() {
     return new URL(`./lib/${this.tag}.haxProperties.json`, import.meta.url)
       .href;
