@@ -30,6 +30,12 @@ class SchedulePage extends LitElement {
       { date: '2025-09-15', team: 'Calder Rugby', location: 'Home', time: '6:00 PM', result: 'W 25-10' },
       { date: '2025-09-28', team: 'Riverside Rugby', location: 'Away', time: '4:30 PM', result: 'L 30-35' },
       { date: '2025-10-12', team: 'PSU Club Rugby', location: 'Home', time: '11:00 AM', result: 'W 45-20' },
+      { date: '2025-10-26', team: 'S Barnard Rugby', location: 'Away', time: '2:00 PM', result: 'W 20-15' },
+      { date: '2025-11-09', team: 'Eastside RFC', location: 'Home', time: '1:00 PM', result: 'L 18-22' },
+      { date: '2025-11-23', team: 'Downtown Rugby', location: 'Away', time: '3:30 PM', result: 'W 32-28' },
+      { date: '2025-12-20', team: 'Ruggerfest Invitationals', location: 'TBD', time: 'TBD', result: 'TBD'},
+      { date: '2026-01-11', team: 'Rugby Regionals', location: 'TBD', time: 'TBD', result: 'TBD' },
+      { date: '2026-01-25', team: 'National Championships', location: 'TBD', time: 'TBD', result: 'TBD' }
     ];
   
   }
